@@ -45,15 +45,14 @@ function config() {
   fi
 
   if [ -z "$GITHUB_RUNNER_NAME" ]; then
-    RNG=$(openssl rand -hex 3)
-    GITHUB_RUNNER_NAME="gh-runner-$RNG"
+    GITHUB_RUNNER_NAME="gh-runner-$(hostname)"
   fi
 
   if [ -z "$GITHUB_RUNNER_WORKDIR" ]; then
     GITHUB_RUNNER_WORKDIR=./_work
   fi
 
-  ./config.sh --url $GITHUB_RUNNER_URL --token $GITHUB_RUNNER_TOKEN --name $GITHUB_RUNNER_NAME --work $GITHUB_RUNNER_WORKDIR
+  ./config.sh --url $GITHUB_RUNNER_URL --token $GITHUB_RUNNER_TOKEN --name $GITHUB_RUNNER_NAME --work $GITHUB_RUNNER_WORKDIR --unattended
 }
 
 case $1 in
