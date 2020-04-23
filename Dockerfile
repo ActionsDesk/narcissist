@@ -16,6 +16,7 @@ RUN tar xf ./actions-runner.tar.gz
 RUN useradd github
 RUN chown -R github /opt/runner
 RUN ./bin/installdependencies.sh
+RUN rm actions-runner.tar.gz
 
 USER github
 
