@@ -9,14 +9,14 @@ WORKDIR /opt/runner
 
 COPY download.sh ./
 COPY entrypoint.sh ./
-RUN chmod +x ./download.sh ./entrypoint.sh
-RUN yum install -y curl jq
-RUN ./download.sh ${RUNNER_VERSION} ${GITHUB_TOKEN}
-RUN tar xf ./actions-runner.tar.gz
-RUN useradd github
-RUN chown -R github /opt/runner
-RUN ./bin/installdependencies.sh
-RUN rm actions-runner.tar.gz
+RUN chmod +x ./download.sh ./entrypoint.sh && \
+  yum install -y curl jq && \
+  ./download.sh ${RUNNER_VERSION} ${GITHUB_TOKEN} && \
+  tar xf ./actions-runner.tar.gz && \
+  useradd github && \
+  chown -R github /opt/runner && \
+  ./bin/installdependencies.sh && \
+  rm actions-runner.tar.gz 
 
 USER github
 
