@@ -1,7 +1,8 @@
 #! /usr/bin/env bash
 
 function run() {
-  ./run.sh
+  if [ -f "/var/run/docker.sock" ]; then chmod g+rw /var/run/docker.sock; fi
+  sudo -u github ./run.sh
 }
 
 function config() {
@@ -52,7 +53,7 @@ function config() {
     GITHUB_RUNNER_WORKDIR=./_work
   fi
 
-  ./config.sh --url $GITHUB_RUNNER_URL --token $GITHUB_RUNNER_TOKEN --name $GITHUB_RUNNER_NAME --work $GITHUB_RUNNER_WORKDIR --unattended
+  sudo -u github ./config.sh --url $GITHUB_RUNNER_URL --token $GITHUB_RUNNER_TOKEN --name $GITHUB_RUNNER_NAME --work $GITHUB_RUNNER_WORKDIR --unattended
 }
 
 case $1 in
